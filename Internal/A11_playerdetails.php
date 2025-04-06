@@ -24,7 +24,7 @@ switch ($type) {
 $username = $_GET['id'];
 
 $q = "SELECT * FROM player_reg WHERE pid=$username";
-$result = mysqli_query($connection, $q);
+$result = mysqli_query($conn, $q);
 $row = mysqli_fetch_assoc($result);
 
 $id = $row['pid'];
@@ -39,7 +39,7 @@ $profilpic = $row['photo'];
 $status = $row['status'];
 
 $q2 = "SELECT * FROM player_phy WHERE pid=$id";
-$result2 = mysqli_query($connection, $q2);
+$result2 = mysqli_query($conn, $q2);
 $row2 = mysqli_fetch_assoc($result2);
 
 function getAge($dateOfBirth) {

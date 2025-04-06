@@ -20,7 +20,7 @@ switch ($type) {
 <!-- --------------------------------------------------------- -->
 <h1 align="center">Suggested Players</h1>
 <?php
-$conn = mysqli_connect("localhost", "username", "password", "database_name");
+//$conn = mysqli_connect("localhost", "username", "password", "database_name");
 
 $username = $_SESSION['username'];
 $q4 = "SELECT * FROM clubs WHERE email='$username'";

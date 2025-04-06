@@ -53,7 +53,7 @@ if(isset($_POST['P1']))
 					$qq1 = "SELECT ph_no FROM player_reg WHERE ph_no=$ph_no";
              $query = mysqli_query($conn, $qq1); 
              $result = mysqli_fetch_array($query);
-             $query2 = mysqli_query($conn, "SELECT owner1_phono,owner2_phno FROM clubs WHERE owner1_phono=$ph_no OR owner2_phno=$ph_no"); 
+             $query2 = mysqli_query($conn, "SELECT owner_phono FROM clubs WHERE owner_phono=$ph_no "); 
              $result2 = mysqli_fetch_array($query2);
              if($result && $result2){
                  $isValid = false;
@@ -219,7 +219,7 @@ if(isset($_POST['Performance']))
 				}
 			break;
 		case 'TEST':
-			if(($run_scored < (($no_six*6) + ($no_four*4))) OR ($overs*6 < ($wide+$noball)) OR ($run_scored < ($centuries*100)+($half_centuries*50)) OR ($wickets>10) OR ($catches>10) OR ($stumping>10) OR ($catches>10) OR ($wickets+$catches+$stumping+$runout > 10) OR $over>450 OR $run_scored > 16200)
+			if(($run_scored < (($no_six*6) + ($no_four*4))) OR ($overs*6 < ($wide+$noball)) OR ($run_scored < ($centuries*100)+($half_centuries*50)) OR ($wickets>10) OR ($catches>10) OR ($stumping>10) OR ($catches>10) OR ($wickets+$catches+$stumping+$runout > 10) OR $overs>450 OR $run_scored > 16200)
 				{
 					$Check=false;
 					echo "<script>alert('TEST - Data entered may not be correct. Try Again')</script>";
@@ -227,7 +227,7 @@ if(isset($_POST['Performance']))
 				}
 			break;
 		case 'T20':
-			if(($run_scored < (($no_six*6) + ($no_four*4))) OR ($overs*6 < ($wide+$noball)) OR ($run_scored < ($centuries*100)+($half_centuries*50)) OR ($wickets>10) OR ($catches>10) OR ($stumping>10) OR ($catches>10) OR ($wickets+$catches+$stumping+$runout > 10) OR $over>4 OR $run_scored > 720)
+			if(($run_scored < (($no_six*6) + ($no_four*4))) OR ($overs*6 < ($wide+$noball)) OR ($run_scored < ($centuries*100)+($half_centuries*50)) OR ($wickets>10) OR ($catches>10) OR ($stumping>10) OR ($catches>10) OR ($wickets+$catches+$stumping+$runout > 10) OR $overs>4 OR $run_scored > 720)
 				{
 					$Check=false;
 					echo "<script>alert('T20 - Data entered may not be correct. Try Again')</script>";

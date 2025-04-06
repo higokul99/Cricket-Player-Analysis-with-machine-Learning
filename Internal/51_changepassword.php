@@ -61,7 +61,10 @@
 </html>
 
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include_once('../db_connection.php');
 
 if(isset($_POST['ChangePassword']))
@@ -73,7 +76,7 @@ if(isset($_POST['ChangePassword']))
     $confirm_new_password = $_POST['newconfirm'];
 
     $q = "SELECT password FROM login WHERE username='$username'";
-    $result = mysqli_query($connection, $q);
+    $result = mysqli_query($conn, $q);
     $row = mysqli_fetch_assoc($result);
     $tbl_password = $row['password'];
 
@@ -82,7 +85,7 @@ if(isset($_POST['ChangePassword']))
         if($new_password == $confirm_new_password)
         {
             $q = "UPDATE login SET password = '$new_password' WHERE username='$username'";
-            $result = mysqli_query($connection, $q);
+            $result = mysqli_query($conn, $q);
             if($result){
                 echo "<script>alert('Password Updated! Re-login now.');</script>";
                 echo "<script>location.href='logout.php';</script>";

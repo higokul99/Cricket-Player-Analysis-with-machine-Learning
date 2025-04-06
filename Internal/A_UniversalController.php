@@ -13,9 +13,9 @@ if(isset($_GET['Action']))
     $Status = $_GET['Action']; // Approve OR Reject will come
 
     $Query_reg = "UPDATE $TableName SET status='$Status' WHERE email = '$Unique_Id'"; echo $Query_reg;
-    $Result_reg = mysqli_query($connection, $Query_reg); 
+    $Result_reg = mysqli_query($conn, $Query_reg); 
     $Query_log = "UPDATE login SET account_status='$Status' WHERE username = '$Unique_Id'"; echo $Query_log;
-    $Result_log = mysqli_query($connection, $Query_log);  
+    $Result_log = mysqli_query($conn, $Query_log);  
 
     //Checking if Execution is good
     $location = "index.php";

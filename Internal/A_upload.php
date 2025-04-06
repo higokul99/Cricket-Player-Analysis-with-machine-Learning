@@ -53,7 +53,7 @@ if($_FILES['csv_info']['name']){
     $sql="UPDATE player_career SET grade='$result',status='Predicted' where pid=$pid";
     echo $sql;
          
-    mysqli_query($connection, $sql);
+    mysqli_query($conn, $sql);
     if($sql)
     {
         echo "<script>alert('Updated Played ID : $pid !');</script>";

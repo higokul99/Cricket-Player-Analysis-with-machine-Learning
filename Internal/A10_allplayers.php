@@ -23,7 +23,7 @@ switch ($type) {
 <?php
 //$username = 'salini@gmail.com';
 $sql = "SELECT * FROM player_reg";
-$result = mysqli_query($connection, $sql);
+$result = mysqli_query($conn, $sql);
 
 // Check if there are any records
 if (mysqli_num_rows($result) > 0) {

@@ -19,9 +19,9 @@ switch ($type) {
 <!-- --------------------------------------------------------- -->
 <h1 align="center">Suggested Players From Clubs for Team</h1>
 <?php
-$connection = mysqli_connect("localhost", "root", "", "your_database_name");
+//$conn = mysqli_connect("localhost", "root", "", "your_database_name");
 $qc = "SELECT * FROM suggested_players";
-$qr = mysqli_query($connection, $qc);
+$qr = mysqli_query($conn, $qc);
 
 if (mysqli_num_rows($qr) > 0) {
     echo "<table class='table table-striped table-bordered mx-auto'>";

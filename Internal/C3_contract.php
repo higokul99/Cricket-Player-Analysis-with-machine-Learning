@@ -19,7 +19,7 @@ switch ($type) {
 <!-- --------------------------------------------------------- -->
 <h1 align="center">My Contract Players</h1>
 <?php
-$conn = mysqli_connect("localhost", "username", "password", "database_name");
+//$conn = mysqli_connect("localhost", "username", "password", "database_name");
 
 $sql = "SELECT pr.*, cp.club_id, pp.role
 FROM player_reg pr

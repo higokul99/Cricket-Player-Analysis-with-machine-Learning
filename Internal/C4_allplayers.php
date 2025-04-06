@@ -19,7 +19,7 @@ switch ($type) {
 <!-- --------------------------------------------------------- -->
 <h1 align="center">View All Players</h1>
 <?php
-$conn = mysqli_connect("localhost", "username", "password", "database_name");
+//$conn = mysqli_connect("localhost", "username", "password", "database_name");
 
 $sql = "SELECT * FROM player_reg WHERE status='Approved' AND acquired_status != 'Acquired'";
 $result = mysqli_query($conn, $sql);

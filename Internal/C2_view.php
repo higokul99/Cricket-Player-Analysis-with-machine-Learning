@@ -23,7 +23,7 @@ switch ($type) {
 <?php
 $username = $_GET['id'];
 
-$conn = mysqli_connect("localhost", "root", "", "cricclub");
+//$conn = mysqli_connect("localhost", "root", "", "cricclub");
 
 $q="SELECT * FROM player_reg WHERE pid=$username";
 $result = mysqli_query($conn, $q);

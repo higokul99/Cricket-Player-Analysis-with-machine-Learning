@@ -8,7 +8,7 @@ $output = fopen("php://output", "w");
 fputcsv($output, array('pid', 'match_played', 'run_scored', 'batting_avg', 'top_score', 'economy', 'wide_balls', 'no_balls', 'wickets', 'catches', 'run_outs', 'stumping'));
 
 $query = "SELECT * FROM player_career WHERE status = 'Updated'";
-$result = mysqli_query($connection, $query);
+$result = mysqli_query($conn, $query);
 while($row = mysqli_fetch_array($result))
 {
     fputcsv($output, array(

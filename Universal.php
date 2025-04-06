@@ -41,7 +41,7 @@ include_once('db_connection.php');
          if($isValid){
  
              // Check if Email-ID already exists
-             $query_register = mysqli_query($connection, "SELECT username FROM login WHERE username='$username'");
+             $query_register = mysqli_query($conn, "SELECT username FROM login WHERE username='$username'");
              $result = mysqli_fetch_array($query_register);
              if($result){
                  $isValid = false;
@@ -57,24 +57,24 @@ include_once('db_connection.php');
                 case 'Player':
                     $SQL_query = "INSERT INTO player_reg(name,email,photo,status) VALUES('$name','$email','profilepic/default.png','New')";
                     echo $SQL_query;
-                     $sql_register = mysqli_query($connection, $SQL_query);
+                     $sql_register = mysqli_query($conn, $SQL_query);
                      
-                     $sql_login = mysqli_query($connection, "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
+                     $sql_login = mysqli_query($conn, "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
                      echo "INSERT INTO login VALUES('$email','$password','$type_of_account')";
                      if($sql_register && $sql_login)
                      {
 $Qx = "SELECT pid FROM player_reg WHERE email='$email'"; echo $Qx;
-$EX = mysqli_query($connection, $Qx);
+$EX = mysqli_query($conn, $Qx);
 $Row = mysqli_fetch_assoc($EX);
 $pid = $Row['pid'];
 
 //Player Phy
 $Q3 = "INSERT INTO player_phy(pid,status) VALUES($pid,'New')"; echo $Q3;
-$X3 = mysqli_query($connection, $Q3);
+$X3 = mysqli_query($conn, $Q3);
 
 //Player career
 $Q4 = "INSERT INTO player_career(pid,status) VALUES($pid,'New')"; echo $Q4;
-$X4 = mysqli_query($connection, $Q4);
+$X4 = mysqli_query($conn, $Q4);
                          echo "<script>alert('Account created successfully.!')</script>";
                          echo "<script>location.href='index.php'</script>";
                      }
@@ -84,8 +84,8 @@ $X4 = mysqli_query($connection, $Q4);
                      }
                      break;
                 case 'Club':
-                         $sql_register = mysqli_query($connection, "INSERT INTO clubs(club_name,email,status) VALUES('$name','$email','New')");
-                         $sql_login = mysqli_query($connection, "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
+                         $sql_register = mysqli_query($conn, "INSERT INTO clubs(club_name,email,status) VALUES('$name','$email','New')");
+                         $sql_login = mysqli_query($conn, "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
                          echo "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')";
                          if($sql_register && $sql_login)
                          {
@@ -123,9 +123,9 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 $table = 'login';
-$sql = "SELECT * FROM $table WHERE username = '$username' AND (account_status = 'New' OR account_status = 'Approved')";
+$sql = "SELECT * FROM $table WHERE username = '$username' AND (account_status = 'New' OR account_status = 'Approved' OR account_status = 'Acquired')";
 
-$result = mysqli_query($connection, $sql);
+$result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) 
 {
     $_SESSION['username'] = $username;

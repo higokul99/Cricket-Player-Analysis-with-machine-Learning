@@ -12,6 +12,9 @@ if (!$db) {
     die("Database connection failed ! >> " . mysqli_connect_error());
 } else {
     //echo "Database connection is fine!";
-    session_start();
+    if (session_status() === PHP_SESSION_NONE) {
+		session_start();
+	}
+	
 }
 ?>

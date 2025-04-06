@@ -119,10 +119,18 @@
                     </div> -->
                     <?php
 $username = $_SESSION['username'];
-    $q = "SELECT * FROM player_reg WHERE email='$username'";
-    $result = mysql_query($q);
-    $row = mysql_fetch_assoc($result);
+$q = "SELECT * FROM player_reg WHERE email = ?";
+$stmt = mysqli_prepare($conn, $q);
+mysqli_stmt_bind_param($stmt, "s", $username);
+mysqli_stmt_execute($stmt);
+$result = mysqli_stmt_get_result($stmt);
+
+$profilpic = "img/user.jpg"; // Default picture fallback
+
+if ($result && mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_assoc($result);
     $profilpic = $row['photo'];
+}
                     ?>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

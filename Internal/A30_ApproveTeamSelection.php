@@ -19,9 +19,9 @@ switch ($type) {
 <!-- --------------------------------------------------------- -->
 <h1 align="center">Approve Team Selection</h1>
 <?php
-$connection = mysqli_connect("localhost", "root", "", "your_database_name");
+$conn = mysqli_connect("localhost", "root", "", "your_database_name");
 $sql = "SELECT * FROM teams WHERE status='Pending'";
-$result = mysqli_query($connection, $sql);
+$result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     echo "<table class='table table-striped table-bordered mx-auto'>";

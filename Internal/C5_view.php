@@ -19,7 +19,7 @@ switch ($type) {
 <!-- --------------------------------------------------------- -->
 <h1 align="center">Review match performance</h1>
 <?php
-$conn = mysqli_connect("localhost", "username", "password", "database_name");
+//$conn = mysqli_connect("localhost", "username", "password", "database_name");
 
 $id = $_GET['id'];
 
