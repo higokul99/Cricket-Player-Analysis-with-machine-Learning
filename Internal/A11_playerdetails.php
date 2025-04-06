@@ -1,5 +1,5 @@
 <?php include('header.php'); ?>
-        <!-- Sidebar Start -->
+<!-- Sidebar Start -->
 <?php 
 $type = $_SESSION['AccountType'];
 switch ($type) {
@@ -17,23 +17,18 @@ switch ($type) {
         // code...
         break;
 }
-
-
-        
-
 ?>
 <!-- --------------------------------------------------------- -->
 <h1 align="center">Players Details</h1>
 <?php
 $username = $_GET['id'];
 
-$q="SELECT * FROM player_reg WHERE pid=$username";
-$result = mysql_query($q);
-$row = mysql_fetch_assoc($result);
+$q = "SELECT * FROM player_reg WHERE pid=$username";
+$result = mysqli_query($connection, $q);
+$row = mysqli_fetch_assoc($result);
 
 $id = $row['pid'];
 $name = $row['name'];
-
 $email = $row['email'];
 $phone_number= $row['ph_no'];
 $gender = $row['gender'];
@@ -43,13 +38,9 @@ $address = $row['address'];
 $profilpic = $row['photo'];
 $status = $row['status'];
 
-$q2="SELECT * FROM player_phy WHERE pid=$id";
-$result2 = mysql_query($q2);
-$row2 = mysql_fetch_assoc($result2);
-
-
-
-
+$q2 = "SELECT * FROM player_phy WHERE pid=$id";
+$result2 = mysqli_query($connection, $q2);
+$row2 = mysqli_fetch_assoc($result2);
 
 function getAge($dateOfBirth) {
   $today = new DateTime('today');
@@ -58,15 +49,9 @@ function getAge($dateOfBirth) {
   return $interval->y;
 }
 
-// Example usage
-//$dateOfBirth = "1990-05-23";
 $dateOfBirth = $dob;
 $age = getAge($dateOfBirth);
-
-
-
 ?>
-
 
 <form action="" method="POST">
 <table align="left" width="70%">
@@ -85,133 +70,73 @@ $age = getAge($dateOfBirth);
 </tr>
 <tr><td><h4>Personal Details</h4></td></tr>
 <tr>
-    <td>
-    Gender :
-    </td>
-    <td>
-        <label>: <?php echo $gender; ?></label>
-    </td>
+    <td>Gender :</td>
+    <td><label>: <?php echo $gender; ?></label></td>
 </tr>
 <tr>
-    <td>
-    Date of birth :
-    </td>
-    <td>
-        <label>: <?php echo $dob; ?></label>
-    </td>
-</tr>
-
-<tr>
-    <td>
-    Phone Number
-    </td>
-    <td>
-        <label>: <?php echo $phone_number; ?></label>
-    </td>
+    <td>Date of birth :</td>
+    <td><label>: <?php echo $dob; ?></label></td>
 </tr>
 <tr>
-    <td>
-    Home Address
-    </td>
-    <td>
-        <label>: <?php echo $address; ?></label>
-    </td>
+    <td>Phone Number</td>
+    <td><label>: <?php echo $phone_number; ?></label></td>
 </tr>
-
-
+<tr>
+    <td>Home Address</td>
+    <td><label>: <?php echo $address; ?></label></td>
+</tr>
 <tr><td><h4>Personal ID</h4></td></tr>
-
 <tr>
-    <td>
-    Profile Pic
-    </td>
-    <td>
-        <label>: Click Edit to change</label>
-    </td>
+    <td>Profile Pic</td>
+    <td><label>: Click Edit to change</label></td>
 </tr>
 <tr>
-    <td>
-    Identification mark
-    </td>
-    <td>
-        <label>: <?php echo $row['identification_mark'];; ?></label>
-    </td>
+    <td>Identification mark</td>
+    <td><label>: <?php echo $row['identification_mark']; ?></label></td>
 </tr>
 <tr>
-    <td>
-    Aadhaar Number
-    </td>
-    <td>
-        <label>: <?php echo $row['aadhaar_no']; ?></label>
-    </td>
+    <td>Aadhaar Number</td>
+    <td><label>: <?php echo $row['aadhaar_no']; ?></label></td>
 </tr>
 <tr>
-    <td>
-    Aadhaar Doc
-    </td>
-    <td>
-        <label>: <a href="<?php echo $row['aadhaar_doc']; ?>" target="_blank">Click here to open the PDF</a>
-</label>
-    </td>
+    <td>Aadhaar Doc</td>
+    <td><label>: <a href="<?php echo $row['aadhaar_doc']; ?>" target="_blank">Click here to open the PDF</a></label></td>
 </tr>
 
 <tr><td><h4>Physical Details</h4></td></tr>
-
 <tr>
-    <td>
-    Height
-    </td>
-    <td>
-        <label>: <?php echo $row2['height']; ?> cm</label>
-    </td>
+    <td>Height</td>
+    <td><label>: <?php echo $row2['height']; ?> cm</label></td>
 </tr>
 <tr>
-    <td>
-    Weight
-    </td>
-    <td>
-        <label>: <?php echo $row2['weight']; ?> kg</label>
-    </td>
+    <td>Weight</td>
+    <td><label>: <?php echo $row2['weight']; ?> kg</label></td>
 </tr>
 <tr>
-    <td>
-    Batting hand
-    </td>
-    <td>
-        <label>: <?php echo $row2['batting']; ?></label>
-    </td>
+    <td>Batting hand</td>
+    <td><label>: <?php echo $row2['batting']; ?></label></td>
 </tr>
 <tr>
-    <td>
-    Bowling Type
-    </td>
-    <td>
-        <label>: <?php echo $row2['bowling']; ?></label>
-    </td>
+    <td>Bowling Type</td>
+    <td><label>: <?php echo $row2['bowling']; ?></label></td>
 </tr>
 <tr>
-    <td>
-    Role
-    </td>
-    <td>
-        <label>: <?php echo $row2['role']; ?></label>
-    </td>
+    <td>Role</td>
+    <td><label>: <?php echo $row2['role']; ?></label></td>
 </tr>
-
-    </table>
+</table>
 </form>
+
 <?php
-
-
 switch ($status) {
     case 'New':
     ?>
     <div align="center">
         <button style="padding: 10px 20px; background-color: Green; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 20px;" name="editbtn">
-            <a href="A_UniversalController.php?Action=Approved&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;' >Approve</a>
+            <a href="A_UniversalController.php?Action=Approved&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;'>Approve</a>
         </button>
         <button style="padding: 10px 20px; background-color: Red; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 20px;" name="editbtn">
-            <a href="A_UniversalController.php?Action=Rejected&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;' >Reject</a>
+            <a href="A_UniversalController.php?Action=Rejected&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;'>Reject</a>
         </button>
     </div>
     <?php 
@@ -219,48 +144,39 @@ switch ($status) {
     case 'Approved':
     ?>
         <div align="center">
-        
         <button style="padding: 10px 20px; background-color: Red; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 20px;" name="editbtn">
-            <a href="A_UniversalController.php?Action=Rejected&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;' >Reject</a>
+            <a href="A_UniversalController.php?Action=Rejected&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;'>Reject</a>
         </button>
     </div>
     <?php
         break;
     case 'Rejected':
-
     ?>
         <div align="center">
         <button style="padding: 10px 20px; background-color: Green; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 20px;" name="editbtn">
-            <a href="A_UniversalController.php?Action=Approved&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;' >Approve</a>
+            <a href="A_UniversalController.php?Action=Approved&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;'>Approve</a>
         </button>
-        
     </div>
-
     <?php
         break;
     case 'Revoked':
         ?>
         <div align="center">
         <button style="padding: 10px 20px; background-color: Green; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 20px;" name="editbtn">
-            <a href="A_UniversalController.php?Action=Approved&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;' >Approve</a>
+            <a href="A_UniversalController.php?Action=Approved&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;'>Approve</a>
         </button>
         <button style="padding: 10px 20px; background-color: Red; color: #fff; border: none; border-radius: 5px; cursor: pointer; font-size: 20px;" name="editbtn">
-            <a href="A_UniversalController.php?Action=Rejected&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;' >Reject</a>
+            <a href="A_UniversalController.php?Action=Rejected&TblName=player_reg&id=<?php echo $email; ?>"  style='color: white;'>Reject</a>
         </button>
     </div>
-
     <?php
         break;
-    
     default:
         ?>
         <!-- code... -->
-
     <?php
         break;
 }
-                
-
 ?>
 <!-- --------------------------------------------------------- -->
 <?php include('footer.php'); ?>

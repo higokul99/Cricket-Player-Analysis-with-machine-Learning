@@ -34,26 +34,30 @@
 <body>
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div>
+        </div> -->
         <!-- Spinner End -->
 <?php 
     include_once('../db_connection.php'); 
 
-
+    // Assuming $conn is defined in db_connection.php using mysqli
     $username = $_SESSION['username'];
+
     $q = "SELECT * FROM login WHERE username='$username'";
-    $result = mysql_query($q);
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($conn, $q);
 
-    $_SESSION['name'] = $row['name'];
-    
-    $_SESSION['AccountType'] = $row['type'];
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
 
-    //echo "<script>alert(`$_SESSION['name'].$_SESSION['AccountType']`);</script>";
-
-
+        $_SESSION['name'] = $row['name'];
+        $_SESSION['AccountType'] = $row['type'];
+    } else {
+        // Handle error or redirect
+        echo "<script>alert('User not found.'); window.location.href='logout.php';</script>";
+        exit();
+    }
 ?>
+

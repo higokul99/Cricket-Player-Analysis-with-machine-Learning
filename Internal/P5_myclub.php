@@ -19,22 +19,22 @@ break;
 }
 
 $Email = $_SESSION['username'];
-  $qq1 = "SELECT pr.*, cp.club_id, c.club_name
+$qq1 = "SELECT pr.*, cp.club_id, c.club_name
 FROM player_reg pr
 INNER JOIN clubs_players cp ON pr.pid = cp.pid
 INNER JOIN clubs c ON cp.club_id = c.club_id WHERE pr.email = '$Email'";
 
 //echo $qq1;
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
-  $pid = $row['pid'];
-  $as = $row['acquired_status'];
+$result = mysqli_query($conn, $qq1); 
+$row = mysqli_fetch_assoc($result);
+$pid = $row['pid'];
+$as = $row['acquired_status'];
 
-   $club_id = $row['club_id'];
+$club_id = $row['club_id'];
 $qq2 = "SELECT * FROM clubs WHERE club_id=$club_id";
-   $result2 = mysql_query($qq2); 
-   $row2 = mysql_fetch_assoc($result2);
-   $club_name = $row2['club_name'];
+$result2 = mysqli_query($conn, $qq2); 
+$row2 = mysqli_fetch_assoc($result2);
+$club_name = $row2['club_name'];
 ?>
 <h1 align="center">My Club</h1>
 <center>
@@ -43,22 +43,10 @@ $qq2 = "SELECT * FROM clubs WHERE club_id=$club_id";
 if($as != 'Acquired')
 {
   ?>
-
 <h2 align="center">You are not acquired by any club yet. </h2>
 <?php
 }else{
   ?>
-<!-- <table>
-<tr>
-  <td>
-    Club ID
-  </td>
-  <td>
-    
-  </td>
-</tr>
-</table> -->
-
 <table align="left" width="70%">
   <tr>
     <td>
@@ -67,8 +55,6 @@ if($as != 'Acquired')
       <span class="d-none d-lg-inline-flex">Email : <?php echo $row2['email']; ?></span><br>
     </td>
     <td>
-      
-      
     </td>
 </tr>
 </tr>
@@ -126,24 +112,11 @@ if($as != 'Acquired')
   License Doc
   </td>
   <td>
-    <!-- <label>: <a href="ddocuments/licensedoc.pdf" target="_blank">Click here to open the PDF</a> -->
-      <label>: <a href="<?php echo $row2['lic_doc']; ?>" target="_blank">Click here to open the PDF</a>
+    <label>: <a href="<?php echo $row2['lic_doc']; ?>" target="_blank">Click here to open the PDF</a>
 </label>
   </td>
 </tr>
-<!-- <tr>
-  <td>
-  
-  </td>
-  <td>
-
-    <a style='display: inline-block; padding: 5px 10px; background-color: #4287f5; color: Black; text-decoration: none; border-radius: 5px;' href="C1_editprofile.php?id=<?php echo $id; ?>&case=P2">Edit</a>
-  </td>
-</tr>
- -->
-
-
-  </table>
+</table>
 <?php
 }
 ?>

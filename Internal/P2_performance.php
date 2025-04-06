@@ -19,10 +19,10 @@ break;
 }
 
 $Email = $_SESSION['username'];
-	$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
-	$pid = $row['pid'];
+$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
+$result = mysqli_query($conn, $qq1); 
+$row = mysqli_fetch_assoc($result);
+$pid = $row['pid'];
 ?>
 <div>
 <h1 align="center">Add your Match Performance</h1>
@@ -36,12 +36,11 @@ $Email = $_SESSION['username'];
     <tr>
       <th><label for="competition">Competition Name ( TEST/ODI/T20 etc ):</label></th>
       <td>
-      	<!-- <input type="text" id="competition" name="competition" required> -->
-      	<select name="competition">
-      		<option value="ODI">ODI</option>
-      		<option value="TEST">TEST</option>
-      		<option value="T20">T20</option>
-      	</select>
+        <select name="competition">
+          <option value="ODI">ODI</option>
+          <option value="TEST">TEST</option>
+          <option value="T20">T20</option>
+        </select>
       </td>
     </tr>
 
@@ -49,16 +48,7 @@ $Email = $_SESSION['username'];
       <th><label for="matches_played">Add your Match Details :</label></th>
       <td><input type="number" id="matches_played" name="matches_played" value="1" hidden></td>
     </tr>
-    
-    <!-- <tr>
-      <th><label for="Batting">Batting (Y/N):</label></th>
-      <td>
-        <select id="Batting" name="Batting" required>
-          <option value="1">Yes</option>
-          <option value="0">No</option>
-        </select>
-      </td>
-    </tr> -->
+
     <tr>
       <th><label for="run_scored">Run Scored:</label></th>
       <td><input type="number" id="run_scored" name="run_scored" pattern="^0$" required></td>
@@ -117,20 +107,5 @@ $Email = $_SESSION['username'];
     </tr>
   </table>
 </form>
-
-<!-- <script>
-  // Toggle bowling-related fields based on selection
-  document.getElementById('balling').addEventListener('change', function() {
-    const bowlingFields = document.getElementById('bowling_fields');
-    if (this.value === 'Y') {
-      bowlingFields.style.display = 'block';
-    } else {
-      bowlingFields.style.display = 'none';
-    }
-  });
-</script> -->
-
-
-
 
 <?php include('footer.php'); ?>

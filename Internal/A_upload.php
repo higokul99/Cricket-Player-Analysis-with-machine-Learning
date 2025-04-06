@@ -48,20 +48,20 @@ if($_FILES['csv_info']['name']){
     $pid = $data[0];
     $result = $data[1];
     $pid=$data[0];
-         $result = $data[1];
+    $result = $data[1];
         
-         $sql="UPDATE player_career SET grade='$result',status='Predicted' where pid=$pid";
-         echo $sql;
+    $sql="UPDATE player_career SET grade='$result',status='Predicted' where pid=$pid";
+    echo $sql;
          
-         mysql_query($sql);
-         if($sql)
-        {
-            echo "<script>alert('Updated Played ID : $pid !');</script>";
-        }
-        else
-        {
-            echo"<script>alert('error');</script>";
-        }
+    mysqli_query($connection, $sql);
+    if($sql)
+    {
+        echo "<script>alert('Updated Played ID : $pid !');</script>";
+    }
+    else
+    {
+        echo"<script>alert('error');</script>";
+    }
   }
   $lineNumber++;
 }
@@ -70,8 +70,5 @@ if($_FILES['csv_info']['name']){
 }
 }
 }
-
-
-
 ?>
 <?php include('footer.php'); ?>

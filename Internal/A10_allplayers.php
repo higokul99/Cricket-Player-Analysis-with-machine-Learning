@@ -1,5 +1,5 @@
 <?php include('header.php'); ?>
-        <!-- Sidebar Start -->
+<!-- Sidebar Start -->
 <?php 
 $type = $_SESSION['AccountType'];
 switch ($type) {
@@ -17,24 +17,20 @@ switch ($type) {
         // code...
         break;
 }
-
-
-        
-
 ?>
 <!-- --------------------------------------------------------- -->
 <h1 align="center">View All Players</h1>
 <?php
 //$username = 'salini@gmail.com';
 $sql = "SELECT * FROM player_reg";
-$result = mysql_query($sql);
+$result = mysqli_query($connection, $sql);
 
 // Check if there are any records
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     // Output data of each row
     echo "<table class='table table-striped table-bordered mx-auto'>";
     echo "<tr><th>Player ID</th><th>Photo</th><th>Name</th><th>Gender</th><th>Status</th><th>View</th></tr>";
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>" . $row['pid'] . "</td>";
         $Pic = $row['photo'];
@@ -50,9 +46,6 @@ if (mysql_num_rows($result) > 0) {
 } else {
     echo "No records found";
 }
-
-
 ?>
-
 <!-- --------------------------------------------------------- -->
 <?php include('footer.php'); ?>

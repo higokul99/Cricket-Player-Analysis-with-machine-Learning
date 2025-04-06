@@ -9,8 +9,8 @@ if(isset($_POST['Strength']))
 	$Email = $_SESSION['username'];
 	$preference = $_POST['player-preference'];
 	$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($conn, $qq1); 
+    $row = mysqli_fetch_assoc($result);
 	$pid = $row['pid'];
 	
 
@@ -19,7 +19,7 @@ $isValid=true;
     if($isValid)
     {
     	$q = "UPDATE player_phy SET preference='$preference' WHERE pid=$pid"; echo $q;
-    	$result = mysql_query($q);
+    	$result = mysqli_query($conn, $q);
     	if($result)
     	{
     		echo "<script>alert('Preference Updated Successfully')</script>";
@@ -51,10 +51,10 @@ if(isset($_POST['P1']))
 	$isValid =true;
 	if($isValid){
 					$qq1 = "SELECT ph_no FROM player_reg WHERE ph_no=$ph_no";
-             $query = mysql_query($qq1); 
-             $result = mysql_fetch_array($query);
-             $query2 = mysql_query("SELECT owner1_phono,owner2_phno FROM clubs WHERE owner1_phono=$ph_no OR owner2_phno=$ph_no"); 
-             $result2 = mysql_fetch_array($query2);
+             $query = mysqli_query($conn, $qq1); 
+             $result = mysqli_fetch_array($query);
+             $query2 = mysqli_query($conn, "SELECT owner1_phono,owner2_phno FROM clubs WHERE owner1_phono=$ph_no OR owner2_phno=$ph_no"); 
+             $result2 = mysqli_fetch_array($query2);
              if($result && $result2){
                  $isValid = false;
                  $error_message = 'Phone Number is already existed.';
@@ -64,7 +64,7 @@ if(isset($_POST['P1']))
     if($isValid)
     {
     	$q = "UPDATE player_reg SET gender='$gender',dob='$dob',ph_no='$ph_no',address='$address' WHERE email='$Email'"; echo $q;
-    	$result = mysql_query($q);
+    	$result = mysqli_query($conn, $q);
     	if($result)
     	{
     		echo "<script>alert('Profile Updated Successfully')</script>";
@@ -89,8 +89,8 @@ if(isset($_POST['Physical']))
 	
 	$Email = $_SESSION['username'];
 	$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($conn, $qq1); 
+    $row = mysqli_fetch_assoc($result);
 	$pid = $row['pid'];
 
 	$height = $_POST['height'];
@@ -104,7 +104,7 @@ if(isset($_POST['Physical']))
     if($isValid)
     {
     	$q = "UPDATE player_phy SET height=$height,weight=$weight,batting='$batting_hand',bowling='$bowling_type',role='$role' WHERE pid='$pid'"; echo $q;
-    	$result = mysql_query($q);
+    	$result = mysqli_query($conn, $q);
     	if($result)
     	{
     		echo "<script>alert('Profile Updated Successfully')</script>";
@@ -125,8 +125,8 @@ if(isset($_POST['Physical']))
 if (isset($_POST['P2'])) {
 	$Email = $_SESSION['username'];
 	$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($conn, $qq1); 
+    $row = mysqli_fetch_assoc($result);
 	$pid = $row['pid'];
 
 	$image_name = $_FILES['profilepic']['name'];
@@ -165,7 +165,7 @@ echo $image_extension;
 	  }
 
 	  $Q = "UPDATE player_reg SET identification_mark='$identification_mark',aadhaar_no='$aadhaar_number',photo='$target_file',aadhaar_doc='$target_file2' WHERE pid=$pid";
-	  $Result = mysql_query($Q);
+	  $Result = mysqli_query($conn, $Q);
 	  if ($result) {
 		echo "<script>alert('Profile Updated Successfully')</script>";
     	echo "<script>location.href='P1_viewprofile.php';</script>";
@@ -183,8 +183,8 @@ if(isset($_POST['Performance']))
 {
 	$Email = $_SESSION['username'];
 	$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
+    $result = mysqli_query($conn, $qq1); 
+    $row = mysqli_fetch_assoc($result);
 	$pid = $row['pid'];
 
 	
@@ -247,7 +247,7 @@ if(isset($_POST['Performance']))
 		$Q = "INSERT INTO player_matchinfo(pid,competition,match_played,run_scored,no_six,no_four,centuries,half_centuries,overs,run_goton_balling,wide_ball,no_ball,wickets,catches,stumping,run_outs,status)
 		VALUES($pid,'$competition',1,$run_scored,$no_six,$no_four,$centuries,$half_centuries,$overs,$balling_run,$wide,$noball,$wickets,$catches,$stumping,$runout,'New')";
 		echo $Q;
-		$Result = mysql_query($Q);
+		$Result = mysqli_query($conn, $Q);
 	
 		if($Result && $Check)
 		{

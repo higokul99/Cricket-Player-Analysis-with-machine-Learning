@@ -19,14 +19,14 @@ break;
 }
 
 $Email = $_SESSION['username'];
-  $qq1 = "SELECT pr.*, cp.club_id, c.club_name
+$qq1 = "SELECT pr.*, cp.club_id, c.club_name
 FROM player_reg pr
 INNER JOIN clubs_players cp ON pr.pid = cp.pid
 INNER JOIN clubs c ON cp.club_id = c.club_id WHERE pr.email = '$Email'";
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
-  $pid = $row['pid'];
-  $as = $row['acquired_status'];
+$result = mysqli_query($conn, $qq1); 
+$row = mysqli_fetch_assoc($result);
+$pid = $row['pid'];
+$as = $row['acquired_status'];
 ?>
 <h1 align="center">My Contract</h1>
 <div>
@@ -34,7 +34,6 @@ INNER JOIN clubs c ON cp.club_id = c.club_id WHERE pr.email = '$Email'";
 if($as != 'Acquired')
 {
   ?>
-
 <h2 align="center">You are not acquired by any club yet. </h2>
 <?php
 }else{

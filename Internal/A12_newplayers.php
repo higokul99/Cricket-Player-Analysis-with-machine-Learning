@@ -17,23 +17,19 @@ switch ($type) {
         // code...
         break;
 }
-
-
-        
-
 ?>
 <!-- --------------------------------------------------------- -->
 <h1 align="center">New Player Registrartions</h1>
 <?php
 $sql = "SELECT * FROM player_reg WHERE status='New'";
-$result = mysql_query($sql);
+$result = mysqli_query($conn, $sql);
 
 // Check if there are any records
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     // Output data of each row
     echo "<table class='table table-striped table-bordered mx-auto'>";
     echo "<tr><th>FID</th><th>Name</th><th>Email</th><th>Phone Number</th><th>Gender</th><th>View</th></tr>";
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>" . $row['pid'] . "</td>";
         echo "<td>" . $row['name'] . "</td>";
@@ -43,17 +39,12 @@ if (mysql_num_rows($result) > 0) {
         
         $id = $row['pid'];
         echo "<td><a style='display: inline-block; padding: 5px 10px; background-color: #4287f5; color: Black; text-decoration: none; border-radius: 5px;' href=A11_playerdetails.php?id='$id'>View</a></td>";
-        //echo "<td><a style='color: red;' href=A_UniversalController.php?id='$id'>Revoke</a></td>";
         echo "</tr>";
     }
     echo "</table>";
 } else {
     echo "No records found";
 }
-
-
-
 ?>
-
 <!-- --------------------------------------------------------- -->
 <?php include('footer.php'); ?>

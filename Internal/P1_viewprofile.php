@@ -22,12 +22,11 @@ break;
 <h1 align="center">My Profile</h1>
 <?php
 
-
 $username = $_SESSION['username'];
 
 $q="SELECT * FROM player_reg WHERE email='$username'";
-$result = mysql_query($q);
-$row = mysql_fetch_assoc($result);
+$result = mysqli_query($conn, $q);
+$row = mysqli_fetch_assoc($result);
 
 $id = $row['pid'];
 $name = $row['name'];
@@ -40,12 +39,8 @@ $blood_grp = $row['blood_grp'];
 $address = $row['address'];
 
 $q2="SELECT * FROM player_phy WHERE pid=$id";
-$result2 = mysql_query($q2);
-$row2 = mysql_fetch_assoc($result2);
-
-
-
-
+$result2 = mysqli_query($conn, $q2);
+$row2 = mysqli_fetch_assoc($result2);
 
 function getAge($dateOfBirth) {
   $today = new DateTime('today');
@@ -54,15 +49,10 @@ function getAge($dateOfBirth) {
   return $interval->y;
 }
 
-// Example usage
-//$dateOfBirth = "1990-05-23";
 $dateOfBirth = $dob;
 $age = getAge($dateOfBirth);
 
-
-
 ?>
-
 
 <form action="" method="POST">
 <table align="left" width="70%">
@@ -138,7 +128,7 @@ $age = getAge($dateOfBirth);
 	Identification mark
 	</td>
 	<td>
-		<label>: <?php echo $row['identification_mark'];; ?></label>
+		<label>: <?php echo $row['identification_mark']; ?></label>
 	</td>
 </tr>
 <tr>
@@ -217,9 +207,7 @@ $age = getAge($dateOfBirth);
 	</td>
 </tr>
 
-
 	</table>
 </form>
-
 
 <?php include('footer.php'); ?>

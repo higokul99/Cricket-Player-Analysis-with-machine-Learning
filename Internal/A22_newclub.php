@@ -1,5 +1,5 @@
 <?php include('header.php'); ?>
-        <!-- Sidebar Start -->
+<!-- Sidebar Start -->
 <?php 
 $type = $_SESSION['AccountType'];
 switch ($type) {
@@ -12,49 +12,38 @@ switch ($type) {
     case 'Club':
         include('includes_club/navbar.php'); 
         break;
-    
     default:
         // code...
         break;
 }
-
-
-        
-
 ?>
 <!-- --------------------------------------------------------- -->
 <h1 align="center">New Club Registration</h1>
 <?php
 $sql = "SELECT * FROM clubs WHERE status='New'";
-$result = mysql_query($sql);
+$result = mysqli_query($conn, $sql);
 
 // Check if there are any records
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     // Output data of each row
     echo "<table class='table table-striped table-bordered mx-auto'>";
     echo "<tr><th>Club ID</th><th>Club Name</th><th>Email</th><th>Owner Name</th><th>Phone Number</th><th>Status</th><th>View</th></tr>";
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>" . $row['club_id'] . "</td>";
         echo "<td>" . $row['club_name'] . "</td>";
         echo "<td>" . $row['email'] . "</td>";
-        
         echo "<td>" . $row['owner_name'] . "</td>";
         echo "<td>" . $row['owner_phono'] . "</td>";
         echo "<td>" . $row['status'] . "</td>";
         $id = $row['club_id'];
-        echo "<td><a style='display: inline-block; padding: 5px 10px; background-color: #4287f5; color: Black; text-decoration: none; border-radius: 5px;' href=A21_viewclubdetails.php?id=$id>View</a></td>";
-        //echo "<td><a style='color: red;' href=A_UniversalController.php?id='$id'>Revoke</a></td>";
+        echo "<td><a style='display: inline-block; padding: 5px 10px; background-color: #4287f5; color: Black; text-decoration: none; border-radius: 5px;' href='A21_viewclubdetails.php?id=$id'>View</a></td>";
         echo "</tr>";
     }
     echo "</table>";
 } else {
     echo "No records found";
 }
-
-
-
 ?>
-
 <!-- --------------------------------------------------------- -->
 <?php include('footer.php'); ?>

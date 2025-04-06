@@ -1,5 +1,5 @@
 <?php include('header.php'); ?>
-        <!-- Sidebar Start -->
+<!-- Sidebar Start -->
 <?php 
 $type = $_SESSION['AccountType'];
 switch ($type) {
@@ -12,48 +12,40 @@ switch ($type) {
     case 'Club':
         include('includes_club/navbar.php'); 
         break;
-    
     default:
-        // code...
         break;
 }
-
-
-        
-
 ?>
 <!-- --------------------------------------------------------- -->
 <h1 align="center">View All Players</h1>
 <?php
-//$username = 'salini@gmail.com';
+$conn = mysqli_connect("localhost", "username", "password", "database_name");
+
 $sql = "SELECT * FROM player_reg WHERE status='Approved' AND acquired_status != 'Acquired'";
-$result = mysql_query($sql);
+$result = mysqli_query($conn, $sql);
 $sql2 = "SELECT * FROM player_reg WHERE status='Approved'";
-$result = mysql_query($sql);
-$result2 = mysql_query($sql2);
-$row1 = mysql_fetch_assoc($result2);
-$id=$row1['pid'];
+$result = mysqli_query($conn, $sql);
+$result2 = mysqli_query($conn, $sql2);
+$row1 = mysqli_fetch_assoc($result2);
+$id = $row1['pid'];
 
-$q2="SELECT * FROM player_phy WHERE pid=$id";
-$result2 = mysql_query($q2);
-$row2 = mysql_fetch_assoc($result2);
+$q2 = "SELECT * FROM player_phy WHERE pid=$id";
+$result2 = mysqli_query($conn, $q2);
+$row2 = mysqli_fetch_assoc($result2);
 
-
-// Check if there are any records
-if (mysql_num_rows($result) > 0) {
-    // Output data of each row
+if (mysqli_num_rows($result) > 0) {
     echo "<table class='table table-striped table-bordered mx-auto'>";
     echo "<tr><th>Player ID</th><th>Photo</th><th>Name</th><th>Role</th><th>Status</th><th>View</th></tr>";
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>" . $row['pid'] . "</td>";
         $Pic = $row['photo'];
-        echo "<td><img class='rounded-circle me-lg-2' src='" . $Pic . "' width='100px' height='100px'</td>";
+        echo "<td><img class='rounded-circle me-lg-2' src='" . $Pic . "' width='100px' height='100px'></td>";
         echo "<td>" . $row['name'] . "</td>";
         echo "<td>" . $row2['role'] . "</td>";
         echo "<td>" . $row['status'] . "</td>";
-        $Link = "C2_view.php?id=".$row['pid'];
-        echo "<td><a href='" . $Link . "''>View</a></td>";
+        $Link = "C2_view.php?id=" . $row['pid'];
+        echo "<td><a href='" . $Link . "'>View</a></td>";
         echo "</tr>";
     }
     echo "</table>";
@@ -61,7 +53,7 @@ if (mysql_num_rows($result) > 0) {
     echo "No records found";
 }
 
-
+mysqli_close($conn);
 ?>
 
 <!-- --------------------------------------------------------- -->

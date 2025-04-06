@@ -20,12 +20,12 @@ break;
 
 $username = $_SESSION['username'];
 $q="SELECT * FROM player_reg WHERE email='$username'";
-$result = mysql_query($q);
-$row = mysql_fetch_assoc($result);
+$result = mysqli_query($conn, $q);
+$row = mysqli_fetch_assoc($result);
 $id = $row['pid'];
 $q3="SELECT * FROM player_career WHERE pid=$id"; //echo $q3;
-$result3 = mysql_query($q3);
-$row3 = mysql_fetch_assoc($result3);
+$result3 = mysqli_query($conn, $q3);
+$row3 = mysqli_fetch_assoc($result3);
 ?>
 <h1 align="center">My Report</h1>
 

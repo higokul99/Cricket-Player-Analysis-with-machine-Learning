@@ -22,13 +22,13 @@ break;
 <h1 align="center">Update Profile</h1>
 
 <?php
-
+//$conn = mysqli_connect("localhost", "root", "", "your_database_name");
 $case = $_GET['case']; //echo $case;
 $id = $_GET['id'];
 $username = $_SESSION['username'];
 $q="SELECT * FROM clubs WHERE email='$username'";
-$result = mysql_query($q);
-$row = mysql_fetch_assoc($result);
+$result = mysqli_query($conn, $q);
+$row = mysqli_fetch_assoc($result);
 
 $id = $row['club_id'];
 $name = $row['club_name'];
@@ -111,8 +111,6 @@ echo "</tr>";
 		echo "Something happened!";
 		break;
 }
-
-
 
 echo "</table>";
 echo "</form>";

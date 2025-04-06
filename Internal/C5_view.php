@@ -1,5 +1,5 @@
 <?php include('header.php'); ?>
-        <!-- Sidebar Start -->
+<!-- Sidebar Start -->
 <?php 
 $type = $_SESSION['AccountType'];
 switch ($type) {
@@ -12,25 +12,20 @@ switch ($type) {
     case 'Club':
         include('includes_club/navbar.php'); 
         break;
-    
     default:
-        // code...
         break;
 }
-
-
-        
-
 ?>
 <!-- --------------------------------------------------------- -->
 <h1 align="center">Review match performance</h1>
 <?php
+$conn = mysqli_connect("localhost", "username", "password", "database_name");
+
 $id = $_GET['id'];
 
-$q="SELECT * FROM player_matchinfo WHERE id=$id"; //echo $q;
-$result = mysql_query($q);
-$row3 = mysql_fetch_assoc($result);
-
+$q = "SELECT * FROM player_matchinfo WHERE id=$id";
+$result = mysqli_query($conn, $q);
+$row3 = mysqli_fetch_assoc($result);
 ?>
 <table align="left" width="70%">
     <tr>
@@ -38,128 +33,64 @@ $row3 = mysql_fetch_assoc($result);
         <td><span>[Record's are updated after their Club owner approved the data entered]<br></span></td>
     </tr>
 <tr>
-  <td>
-  Competition
-  </td>
-  <td>
-    <label>: <?php echo $row3['competition']; ?></label>
-  </td>
+  <td>Competition</td>
+  <td><label>: <?php echo $row3['competition']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Matches played
-  </td>
-  <td>
-    <label>: <?php echo $row3['match_played']; ?></label>
-  </td>
+  <td>Matches played</td>
+  <td><label>: <?php echo $row3['match_played']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Runs Scored
-  </td>
-  <td>
-    <label>: <?php echo $row3['run_scored']; ?></label>
-  </td>
+  <td>Runs Scored</td>
+  <td><label>: <?php echo $row3['run_scored']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  No of 6's
-  </td>
-  <td>
-    <label>: <?php echo $row3['no_six']; ?></label>
-  </td>
+  <td>No of 6's</td>
+  <td><label>: <?php echo $row3['no_six']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  No of 4's
-  </td>
-  <td>
-    <label>: <?php echo $row3['no_four']; ?></label>
-  </td>
-</tr>
-
-<tr>
-  <td>
-  Centuries
-  </td>
-  <td>
-    <label>: <?php echo $row3['centuries']; ?></label>
-  </td>
+  <td>No of 4's</td>
+  <td><label>: <?php echo $row3['no_four']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Half Centuries
-  </td>
-  <td>
-    <label>: <?php echo $row3['half_centuries']; ?></label>
-  </td>
-</tr>
-
-
-<tr>
-  <td>
-  Overs (in Total)
-  </td>
-  <td>
-    <label>: <?php echo $row3['overs']; ?></label>
-  </td>
+  <td>Centuries</td>
+  <td><label>: <?php echo $row3['centuries']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Runs on Over (in Total)
-  </td>
-  <td>
-    <label>: <?php echo $row3['run_goton_balling']; ?></label>
-  </td>
-</tr>
-
-<tr>
-  <td>
-  Wides
-  </td>
-  <td>
-    <label>: <?php echo $row3['wide_ball']; ?></label>
-  </td>
+  <td>Half Centuries</td>
+  <td><label>: <?php echo $row3['half_centuries']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  No Balls
-  </td>
-  <td>
-    <label>: <?php echo $row3['no_ball']; ?></label>
-  </td>
+  <td>Overs (in Total)</td>
+  <td><label>: <?php echo $row3['overs']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Wickets
-  </td>
-  <td>
-    <label>: <?php echo $row3['wickets']; ?></label>
-  </td>
+  <td>Runs on Over (in Total)</td>
+  <td><label>: <?php echo $row3['run_goton_balling']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Catches
-  </td>
-  <td>
-    <label>: <?php echo $row3['catches']; ?></label>
-  </td>
+  <td>Wides</td>
+  <td><label>: <?php echo $row3['wide_ball']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Stumping
-  </td>
-  <td>
-    <label>: <?php echo $row3['stumping']; ?></label>
-  </td>
+  <td>No Balls</td>
+  <td><label>: <?php echo $row3['no_ball']; ?></label></td>
 </tr>
 <tr>
-  <td>
-  Run Outs
-  </td>
-  <td>
-    <label>: <?php echo $row3['run_outs']; ?></label>
-  </td>
+  <td>Wickets</td>
+  <td><label>: <?php echo $row3['wickets']; ?></label></td>
+</tr>
+<tr>
+  <td>Catches</td>
+  <td><label>: <?php echo $row3['catches']; ?></label></td>
+</tr>
+<tr>
+  <td>Stumping</td>
+  <td><label>: <?php echo $row3['stumping']; ?></label></td>
+</tr>
+<tr>
+  <td>Run Outs</td>
+  <td><label>: <?php echo $row3['run_outs']; ?></label></td>
 </tr>
 <tr>
     <td></td>
@@ -180,20 +111,15 @@ switch ($status) {
     </div>
     <?php 
         break;
-    
     default:
         ?>
         <!-- code... -->
-
     <?php
         break;
 }
-                
-
 ?>
     </td>
 </tr>
-
- </table>
+</table>
 <!-- --------------------------------------------------------- -->
 <?php include('footer.php'); ?>

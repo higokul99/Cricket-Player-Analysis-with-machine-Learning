@@ -17,28 +17,23 @@ switch ($type) {
         // code...
         break;
 }
-
-
-        
-
 ?>
 <!-- --------------------------------------------------------- -->
 <h1 align="center">All Clubs</h1>
 <?php
 $sql = "SELECT * FROM clubs";
-$result = mysql_query($sql);
+$result = mysqli_query($conn, $sql);
 
 // Check if there are any records
-if (mysql_num_rows($result) > 0) {
+if (mysqli_num_rows($result) > 0) {
     // Output data of each row
     echo "<table class='table table-striped table-bordered mx-auto'>";
     echo "<tr><th>Club ID</th><th>Club Name</th><th>Email</th><th>Owner Name</th><th>Phone Number</th><th>Status</th><th>View</th></tr>";
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         echo "<tr>";
         echo "<td>" . $row['club_id'] . "</td>";
         echo "<td>" . $row['club_name'] . "</td>";
         echo "<td>" . $row['email'] . "</td>";
-        
         echo "<td>" . $row['owner_name'] . "</td>";
         echo "<td>" . $row['owner_phono'] . "</td>";
         echo "<td>" . $row['status'] . "</td>";
@@ -51,9 +46,6 @@ if (mysql_num_rows($result) > 0) {
 } else {
     echo "No records found";
 }
-
-
-
 ?>
 
 <!-- --------------------------------------------------------- -->

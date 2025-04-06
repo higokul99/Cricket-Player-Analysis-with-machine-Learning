@@ -25,7 +25,7 @@
 
             
             <div class="col-12 mt-4">
-                <p class="mbr-fonts-style copyright display-7">© 2024 Rule 42. All Rights Reserved</p>
+                <p class="mbr-fonts-style copyright display-7">© 2025 Rule 42. All Rights Reserved</p>
             </div>
         </div>
     </div>

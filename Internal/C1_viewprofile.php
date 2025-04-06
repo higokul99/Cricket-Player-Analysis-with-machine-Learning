@@ -21,13 +21,12 @@ break;
 <div>
 <h1 align="center">My Profile</h1>
 <?php
-
-
+//$conn = mysqli_connect("localhost", "root", "", "your_database_name");
 $username = $_SESSION['username'];
 
 $q="SELECT * FROM clubs WHERE email='$username'";
-$result = mysql_query($q);
-$row = mysql_fetch_assoc($result);
+$result = mysqli_query($conn, $q);
+$row = mysqli_fetch_assoc($result);
 
 $id = $row['club_id'];
 $name = $row['club_name'];
@@ -37,10 +36,7 @@ $owner_name = $row['owner_name'];
 $location = $row['location'];
 $founded_year = $row['founded_year'];
 $website = $row['website'];
-
-
 ?>
-
 
 <form action="" method="POST">
 <table align="left" width="70%">
@@ -124,11 +120,7 @@ $website = $row['website'];
 		<a style='display: inline-block; padding: 5px 10px; background-color: #4287f5; color: Black; text-decoration: none; border-radius: 5px;' href="C1_editprofile.php?id=<?php echo $id; ?>&case=P2">Edit</a>
 	</td>
 </tr>
-
-
-
 	</table>
 </form>
-
 
 <?php include('footer.php'); ?>

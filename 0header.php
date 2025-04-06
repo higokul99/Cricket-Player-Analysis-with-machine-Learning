@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/g1433decf8db7b97557666099667c-h_lu8i9cln.png" type="image/x-icon">
   <meta name="description" content="Explore the world of cricket through the lens of player analysis. Discover the stars of the game and gain insights into their performance.">
-  <title>Rule 42 </title>
+  <title>Rule 42 - AI Cricket player analysis</title>
   <link rel="stylesheet" href="https://r.mobirisesite.com/365737/assets/web/assets/mobirise-icons2/mobirise2.css?rnd=1711465643634">
   <link rel="stylesheet" href="https://r.mobirisesite.com/365737/assets/bootstrap/css/bootstrap.min.css?rnd=1711465643634">
   <link rel="stylesheet" href="https://r.mobirisesite.com/365737/assets/bootstrap/css/bootstrap-grid.min.css?rnd=1711465643634">

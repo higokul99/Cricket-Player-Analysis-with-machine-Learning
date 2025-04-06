@@ -19,13 +19,13 @@ break;
 }
 
 $Email = $_SESSION['username'];
-	$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
-    $result = mysql_query($qq1); 
-    $row = mysql_fetch_assoc($result);
-	$pid = $row['pid'];
+$qq1 = "SELECT pid FROM player_reg WHERE email='$Email'";
+$result = mysqli_query($conn, $qq1); 
+$row = mysqli_fetch_assoc($result);
+$pid = $row['pid'];
 $qq2 = "SELECT preference FROM player_phy WHERE pid=$pid"; 
-    $result2 = mysql_query($qq2); 
-    $row2 = mysql_fetch_assoc($result2);
+$result2 = mysqli_query($conn, $qq2); 
+$row2 = mysqli_fetch_assoc($result2);
 ?>
 <h1 align="center">My Strength Preference</h1>
 
@@ -34,8 +34,8 @@ $qq2 = "SELECT preference FROM player_phy WHERE pid=$pid";
   text-align: center;
   font-size: 20px;
 }
-
 </style>
+
 <form method="POST" action="ControllerPlayer.php">
 <div class="preference-container">
 	<label>Selected Preference : </label><label><?php echo $row2['preference']; ?></label><br>

@@ -41,13 +41,8 @@ include_once('db_connection.php');
          if($isValid){
  
              // Check if Email-ID already exists
-             // $stmt = $connection->prepare("SELECT * FROM users WHERE email = ?");
-             // $stmt->bind_param("s", $email);
-             // $stmt->execute();
-             // $result = $stmt->get_result();
-             // $stmt->close();
-             $query_register = mysql_query("SELECT username FROM login WHERE username='$username'");
-             $result = mysql_fetch_array($query_register);
+             $query_register = mysqli_query($connection, "SELECT username FROM login WHERE username='$username'");
+             $result = mysqli_fetch_array($query_register);
              if($result){
                  $isValid = false;
                  $error_message = "Email-ID is already existed.";
@@ -57,59 +52,48 @@ include_once('db_connection.php');
  echo $isValid;
          // Insert records
          if($isValid){
-             // $insertSQL = "INSERT INTO register(name,email,phone_number,password) VALUES(?,?,?,?)";
-             // $stmt = $con->prepare($insertSQL);
-             // $stmt->bind_param("ssis",$name,$email,$phone_number,$password);
-             // $stmt->execute();
-             // $stmt->close();
-             //echo "TOA:".$type_of_account;
              switch($type_of_account)
              {
                 case 'Player':
                     $SQL_query = "INSERT INTO player_reg(name,email,photo,status) VALUES('$name','$email','profilepic/default.png','New')";
                     echo $SQL_query;
-                     $sql_register = mysql_query($SQL_query);
+                     $sql_register = mysqli_query($connection, $SQL_query);
                      
-                     $sql_login = mysql_query("INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
+                     $sql_login = mysqli_query($connection, "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
                      echo "INSERT INTO login VALUES('$email','$password','$type_of_account')";
                      if($sql_register && $sql_login)
                      {
 $Qx = "SELECT pid FROM player_reg WHERE email='$email'"; echo $Qx;
-$EX = mysql_query($Qx);
-$Row = mysql_fetch_assoc($EX);
+$EX = mysqli_query($connection, $Qx);
+$Row = mysqli_fetch_assoc($EX);
 $pid = $Row['pid'];
 
 //Player Phy
 $Q3 = "INSERT INTO player_phy(pid,status) VALUES($pid,'New')"; echo $Q3;
-$X3 = mysql_query($Q3);
+$X3 = mysqli_query($connection, $Q3);
 
 //Player career
 $Q4 = "INSERT INTO player_career(pid,status) VALUES($pid,'New')"; echo $Q4;
-$X4 = mysql_query($Q4);
+$X4 = mysqli_query($connection, $Q4);
                          echo "<script>alert('Account created successfully.!')</script>";
                          echo "<script>location.href='index.php'</script>";
                      }
                      else
                      {
-                         //$error_message = "Registration failed due to any reason.";
                          echo "<script>alert('Registration failed due to any reason!')</script>";
-                         //echo "<script>location.href='index.php'</script>";
                      }
                      break;
                 case 'Club':
-                         $sql_register = mysql_query("INSERT INTO clubs(club_name,email,status) VALUES('$name','$email','New')");
-                         //echo "INSERT INTO register_warehouse VALUES('$name','$email',$phone_number)";
-                         $sql_login = mysql_query("INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
+                         $sql_register = mysqli_query($connection, "INSERT INTO clubs(club_name,email,status) VALUES('$name','$email','New')");
+                         $sql_login = mysqli_query($connection, "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')");
                          echo "INSERT INTO login(username,password,name,type,account_status) VALUES('$email','$password','$name','$type_of_account','New')";
                          if($sql_register && $sql_login)
                          {
-                             //$success_message = "Account created successfully.";
                              echo "<script>alert('Account created successfully.!')</script>";
                              echo "<script>location.href='index.php'</script>";
                          }
                          else
                          {
-                             //$error_message = "Registration failed due to any reason.";
                              echo "<script>alert('Registration failed due to any reason!')</script>";
                              echo "<script>location.href='index.php'</script>";
                          }
@@ -121,7 +105,6 @@ $X4 = mysql_query($Q4);
              }
              
          }else{
-            //echo "<script>alert('Error!')</script>";
             echo $error_message;
          }
      }
@@ -140,27 +123,19 @@ $username = $_POST['username'];
 $password = $_POST['password'];
 
 $table = 'login';
-//$sql = "SELECT * FROM $table WHERE username = '$username' AND (account_status = 'New' OR account_status = 'Approved')";
-
 $sql = "SELECT * FROM $table WHERE username = '$username' AND (account_status = 'New' OR account_status = 'Approved')";
 
-//$result = $conn->query($sql);
-$result = mysql_query($sql);
-//$result->num_rows
-if (mysql_num_rows($result) > 0) 
+$result = mysqli_query($connection, $sql);
+if (mysqli_num_rows($result) > 0) 
 {
     $_SESSION['username'] = $username;
-    //$row = $result->fetch_assoc();
-    $row = mysql_fetch_assoc($result);
+    $row = mysqli_fetch_assoc($result);
     $Table_Password = $row['password'];
     $type_of_user = $row['type'];
 
     if ($password == $Table_Password) 
     {
         echo "<script>alert('Login successful! Welcome, $username.');</script>";
-        //echo "Login successful! Welcome, $username.";
-        //Special condition
-        //$root = 'Wednesday';
 
 switch ($type_of_user) {
     case 'Player':
@@ -185,7 +160,6 @@ switch ($type_of_user) {
     default:
         echo "Internal Error occured!";
         echo "<script>alert('Internal Error occured!');</script>";
-        //echo "<script>location.href='Admin2/2index.php'</script>";
         break;
     }
     }
