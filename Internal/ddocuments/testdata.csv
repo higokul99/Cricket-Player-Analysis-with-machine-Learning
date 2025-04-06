@@ -1,0 +1,7 @@
+id,pid,match_played,run_scored,no_of_six,no_of_four,batting_avg,centuries,half_centuries,top_score,no_over_thrown,economy,wide_balls,no_balls,wickets,catches,run_outs,stumping,grade,status
+<br />,,,,,,,,,,,,,,,,,,,
+<b>Notice</b>:  Undefined variable: con in <b>G:\wamp\www\2024\Rule 42 Cricket Team Analysis\Internal\generatecsv.php</b> on line <b>10</b><br />,,,,,,,,,,,,,,,,,,,
+<br />,,,,,,,,,,,,,,,,,,,
+<b>Warning</b>:  mysql_query() expects parameter 2 to be resource, null given in <b>G:\wamp\www\2024\Rule 42 Cricket Team Analysis\Internal\generatecsv.php</b> on line <b>10</b><br />,,,,,,,,,,,,,,,,,,
+<br />,,,,,,,,,,,,,,,,,,,
+<b>Warning</b>:  mysql_fetch_array() expects parameter 1 to be resource, null given in <b>G:\wamp\www\2024\Rule 42 Cricket Team Analysis\Internal\generatecsv.php</b> on line <b>11</b><br />,,,,,,,,,,,,,,,,,,
